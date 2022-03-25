@@ -28,10 +28,21 @@ img {
   border: 1px solid #fff;
 }
 
-div {
+div.main {
   height: 3000px;
 }
 
+.dv-bar {
+  background: rebeccapurple;
+  padding: 3px;
+  margin: 1px;
+}
+.dv-container {
+  font-size: 10px;
+  font-family: sans-serif;
+  text-align: right;
+  color: white;
+}
 /* p {
   padding: 16px;
   margin: 1em;
