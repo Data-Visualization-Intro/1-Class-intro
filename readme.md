@@ -14,6 +14,7 @@
     - [HTML, CSS and JavaScript Comments](#html-css-and-javascript-comments)
     - [Box Sizing](#box-sizing)
     - [Media Queries Demo](#media-queries-demo)
+  - [Data Visualization](#data-visualization)
 
 # Introduction
 
@@ -29,8 +30,6 @@ Your instructor - Daniel Deverell (he, him): Front & Back end developer speciali
 
 [Email](mailto:daniel.deverell@nyu.edu) - `daniel.deverell@nyu.edu`
 
-[LinkedIn](https://www.linkedin.com/in/danieldeverell/) - https://www.linkedin.com/in/danieldeverell/
-
 ### Github
 
 Go to [Github](https://github.com/Data-Visualization-Intro). `https://github.com/Data-Visualization-Intro`, is the source for _all files_ and notes used in this class. Class activities are documented in a readme file.
@@ -44,7 +43,7 @@ At the end of class I typically upload or "push" my files back up to Github for 
 - Press the spacebar if muted to temporarily enable the microphone
 - If possible, leave your camera on
 - Use a second screen by dialing into Zoom on another device or use a larger monitor
-- You will need to configure Zoom for screen sharing (requires restarting Zoom)
+- You may need to configure Zoom for screen sharing (requires restarting Zoom)
 - Recordings are made available on request
 - If you raise your hand please alert me via voice
 
@@ -53,8 +52,8 @@ At the end of class I typically upload or "push" my files back up to Github for 
 A listing of applications and technologies you will be introduced to in the class include:
 
 - HTML, CSS and JavaScript DOM manipulation
-- D3 for data visualization
-- Visual Studio Code and the Terminal
+- SVG and D3 for data visualization
+- Visual Studio Code
 - Node and Node Package Manager (NPM)
 - AJAX and fetching and displaying data from APIs
 
@@ -228,14 +227,6 @@ This simple document illustrates the three pillars of the web - content, appeara
 1. Appearance (CSS) - uses CSS to determine how the content will appear to the user
 1. Behavior (JavaScript) - uses JavaScript to control how the pages works and allow the user to interact with the content
 
-<!-- ## Separation of Concerns
-
-This sample page illustrates the three pillars of the web and comprise an example of the [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) - an important principle in programming.
-
-Another example of the separation of concerns might be MVC (model, view, controller) which corresponds to database, interface, and business logic.
-
-Concerns here are the different aspects of software functionality. For instance, in MVC, the business logic or _controller_ is a concern, and the interface or _view_ through which a person uses this logic is another. Changing the interface should not require changing the business logic, and vice versa. This makes it possible to assign different roles and responsibilities to each area for a large organization. -->
-
 ### HTML, CSS and JavaScript Comments
 
 In most editors the keyboard shortcut `cmd-/` will comment out a line or lines with the appropriate code:
@@ -307,3 +298,123 @@ Change it to use `max-width`:
 Note: `max-width` means "less than".
 
 In the first case (`min-width`) the styles are added when the screen is small. In the second the styles are added when the screen is wide. This will be important when we start optimizing our CSS for devices with different screen sizes.
+
+## Data Visualization
+
+```html
+<div style="font: 10px sans-serif; text-align: right; color: white;">
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 40px;">
+    4
+  </div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 80px;">
+    8
+  </div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 150px;">
+    15
+  </div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 160px;">
+    16
+  </div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 230px;">
+    23
+  </div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 420px;">
+    42
+  </div>
+</div>
+```
+
+```js
+// ============================================================
+var firstParagraph = document.querySelector("p");
+
+function makeDiv() {
+  const p = document.createElement("p");
+  p.innerHTML = "Hello, world!";
+  firstParagraph.append(p);
+}
+makeDiv();
+
+// ============================================================
+
+var data = [40, 80, 150, 160, 230, 420];
+
+var chart = `
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[0]}px;">${data[0]}</div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[1]}px;">${data[1]}</div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[2]}px;">${data[2]}</div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[3]}px;">${data[3]}</div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[4]}px;">${data[4]}</div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[5]}px;">${data[5]}</div>
+`;
+
+firstParagraph.innerHTML = chart;
+
+// ============================================================
+
+var data = [40, 80, 150, 160, 230, 420];
+var chart = "";
+for (var dataPoint = 0; dataPoint < data.length; dataPoint++) {
+  chart += `<div class="dv-bar" width: ${data[dataPoint]}px;">
+      ${data[dataPoint]}
+    </div>`;
+}
+
+firstParagraph.innerHTML = chart;
+
+// ============================================================
+
+var data = [40, 80, 150, 160, 230, 420];
+
+var chart = document.createElement("div");
+chart.className = "dv-container";
+
+for (var dataPoint = 0; dataPoint < data.length; dataPoint++) {
+  chart.innerHTML += `<div class="dv-bar" style="width: ${data[dataPoint]}px;">
+      ${data[dataPoint]}
+    </div>`;
+}
+
+firstParagraph.append(chart);
+
+// ============================================================
+
+var data = [40, 80, 150, 160, 230, 420];
+
+var chart = "";
+
+for (dataPoint in data) {
+  chart += `<div class="dv-bar foo" style="width: ${data[dataPoint]}px;">
+      ${data[dataPoint]}
+    </div>`;
+}
+
+firstParagraph.innerHTML = chart;
+
+// ============================================================
+
+var data = [40, 80, 150, 160, 230, 420];
+
+var dataPlusHundered = data.map((num) => num + 100);
+
+console.log(dataPlusHundered);
+
+const sortable = [3, 6, 5, 1, 9, 6, 5, 8, 2, 7];
+
+console.log([3, 6, 5, 1, 9, 6, 5, 8, 2, 7].sort());
+
+// ============================================================
+
+var data = [40, 80, 150, 160, 230, 420];
+
+var chart = `<div class="dv-container">
+  ${data.map(
+    (bar) =>
+      `<div class="dv-bar" style="width: ${bar}px;">
+      ${bar}
+    </div>`
+  )}
+</div>`;
+
+firstParagraph.innerHTML = chart;
+```
