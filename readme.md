@@ -32,7 +32,7 @@ Your instructor - Daniel Deverell (he, him): Front & Back end developer speciali
 
 ### Github
 
-Go to [Github](https://github.com/Data-Visualization-Intro). `https://github.com/Data-Visualization-Intro`, is the source for _all files_ and notes used in this class. Class activities are documented in a readme file.
+Go to [the class home page on Github](https://github.com/Data-Visualization-Intro). `https://github.com/Data-Visualization-Intro`, is the source for _all files_ and notes used in this class. Class activities are documented in a readme file.
 
 Please keep the notes open in a tab or another browser during class for reference and in order to copy and paste code.
 
@@ -54,12 +54,11 @@ A listing of applications and technologies you will be introduced to in the clas
 - HTML, CSS and JavaScript DOM manipulation
 - SVG and D3 for data visualization
 - Visual Studio Code
-- Node and Node Package Manager (NPM)
 - AJAX and fetching and displaying data from APIs
 
 ## Introductory Exercise
 
-This exercise introduces some web development basics but is primarily intended to get set up and to give you a feel for the techniques we will be using.
+This exercise introduces some web development basics but is also intended to get you set up and to give you a feel for the class structure.
 
 1. Create a directory in your preferred location that you will use for _all files in this class_.
 2. Download the zip file from this page using the green "Code" download button on Github
