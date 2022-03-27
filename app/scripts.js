@@ -101,3 +101,4 @@ var chart =
 </div>`;
 
 firstParagraph.innerHTML = chart;
+
