@@ -1,13 +1,13 @@
-// select parts of the document & store them in variables
+// select document elements & store them in variables
 var textSpan = document.querySelector("p span");
 var kittenPic = document.querySelector("img");
 
-// create a new variable to store kitten clicks
+// create a new variable and initialize it to zero (to store kitten clicks)
 var kittenClicks = 0;
 
-// set up the kittenPic to listen for clicks
+// add a click event listener to kittenPic
 kittenPic.addEventListener("click", function () {
-  // and run commands when the kitten is clicked
+  // commands to run when the kitten is clicked
   kittenClicks = kittenClicks + 1;
   console.log("You kitten clicked " + kittenClicks + " times!");
   textSpan.textContent = kittenClicks;

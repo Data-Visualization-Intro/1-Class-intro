@@ -11,10 +11,11 @@
     - [User Agent Styles](#user-agent-styles)
   - [CSS Syntax](#css-syntax)
     - [Three Pillars of the Web](#three-pillars-of-the-web)
+      - [The Fourth Pillar](#the-fourth-pillar)
     - [HTML, CSS and JavaScript Comments](#html-css-and-javascript-comments)
-    - [Box Sizing](#box-sizing)
     - [Media Queries Demo](#media-queries-demo)
   - [Data Visualization](#data-visualization)
+  - [Homework](#homework)
 
 # Introduction
 
@@ -63,7 +64,7 @@ This exercise introduces some web development basics but is also intended to get
 1. Create a directory in your preferred location that you will use for _all files in this class_.
 2. Download the zip file from this page using the green "Code" download button on Github
 3. Unarchive the zip file into your new directory
-4. Open the folder `introduction-master` in VS Code
+4. Open the folder `introduction-main` in VS Code
 5. Create a new `index.html` in the `app` directory
 6. In your .html file - type in ! and press tab and this should appear:
 
@@ -110,13 +111,13 @@ HTML tags or elements are interpreted as a box in the browser. They have CSS pro
 
 ### Block vs Inline
 
-Most HTML elements have a default `display` property of `block` which means that they create a rectangular box in the browser.
+Most HTML elements have a default `display` property of `block` which means that they create a rectangular box in the browser and be stacked in the order they appear in the HTML.
 
 The "opposite" of block in HTML is `inline`. An example might be a piece of italicized text `<em>` or a link `<a>`. A `<div>` tag is used to create an arbitrary block element and a `<span>` tag is used to create arbitrary inline elements.
 
 The paragraph tag `<p>` creates a box (block) and by default has space above and below it while the italicized text (inline) does not and simply flows along with the rest of the text.
 
-A `<div>` tag is a block tag which is used to create a logical division in your code. It creates an arbitrary box in a browser but other than that has no display characteristics. `div` tags are useful but don't say anything about the content inside them. Use HTML5 [semantic tags](https://www.w3schools.com/html/html5_semantic_elements.asp) whenever possible.
+A `<div>` tag is a block tag which is used to create a logical division in your code. It creates an arbitrary box in a browser but other than that has no display characteristics. `div` tags are useful but don't convey information about the content inside them. Use HTML5 [semantic tags](https://www.w3schools.com/html/html5_semantic_elements.asp) whenever possible.
 
 Try:
 
@@ -124,7 +125,7 @@ Try:
 
 ### HTML and Semantics
 
-HTML tags convey _meaning_ to the content that makes up the document to help make it understandable. Since HTML tags can be made to look anyway you want they are [semantically](https://en.wikipedia.org/wiki/Semantic_HTML) - not stylistically - important. The proper use of HTML tags is important for accessibility.
+HTML tags convey _meaning_ to the content that makes up the document to help make it understandable. Since HTML tags can be made to look anyway you want via CSS they are [semantically](https://en.wikipedia.org/wiki/Semantic_HTML) - not stylistically - important. The proper use of HTML tags is important for accessibility.
 
 HTML tags have _attributes_ that provide additional information about HTML elements such as the `href` in the anchor (`<a href >`) tag.
 
@@ -188,20 +189,23 @@ Try:
 Delete the body tag and its contents. Paste the following in in its place.
 
 ```html
-<body>
+<body id="top">
   <h1>Hello world!</h1>
-  <div>
-    <p>
-      Paragraph's and divs are block elements. They're rendered inside a box.
-    </p>
+  <main>
+    <p>Paragraph's and divs are block elements. They rendered inside a box.</p>
+
     <p>
       This <em>italic text</em> is an inline element. Here is a
       <a href="#test">link</a> - also an inline element.
     </p>
+
     <img src="http://placekitten.com/320/240" alt="click the kitten" />
+
     <p>You clicked on the kitten <span>0</span> times</p>
-  </div>
+  </main>
+
   <p id="test"><a href="#top">Down here!</a></p>
+
   <script src="scripts.js"></script>
 </body>
 ```
@@ -218,6 +222,27 @@ Try:
 
 Examine the applicable JS and CSS.
 
+Streamline / modernize the JS:
+
+```js
+// select document elements & store them in variables
+const textSpan = document.querySelector(".kitten-num");
+const kittenPic = document.querySelector(".kitten-pic");
+
+// create a new variable and initialize it to zero (to store kitten clicks)
+let kittenClicks = 0;
+
+// add a click event listener to kittenPic
+kittenPic.addEventListener("click", registerClick);
+
+function registerClick() {
+  // commands to run when the kitten is clicked
+  kittenClicks++;
+  console.log(`You kitten clicked ${kittenClicks} times!`);
+  textSpan.innerText = kittenClicks;
+}
+```
+
 ### Three Pillars of the Web
 
 This simple document illustrates the three pillars of the web - content, appearance and behavior - working together. It is an example of the [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) - an important principle in programming.
@@ -225,6 +250,29 @@ This simple document illustrates the three pillars of the web - content, appeara
 1. Content (HTML) - uses HTML to _semantically_ markup the content
 1. Appearance (CSS) - uses CSS to determine how the content will appear to the user
 1. Behavior (JavaScript) - uses JavaScript to control how the pages works and allow the user to interact with the content
+
+#### The Fourth Pillar
+
+In this class we will be using and addition web technology - scalable vector graphics (SVG). SVG is to graphics what HTML is to text.
+
+```svg
+<svg width="300" height="200">
+   <circle cx="150" cy="100" r="80" fill="green" />
+</svg>
+```
+
+SVG can be styled with CSS:
+
+```css
+svg {
+  width: 300px;
+  height: 200px;
+}
+
+svg circle {
+  fill: green;
+}
+```
 
 ### HTML, CSS and JavaScript Comments
 
@@ -237,10 +285,10 @@ In most editors the keyboard shortcut `cmd-/` will comment out a line or lines w
 Try:
 
 - Comment on and off the meta tag in the HTML file while viewing the result in the browser with the Toggle device button on and off
-- Comment out the body CSS rule and a CSS rule
+- Comment out the body CSS rule
 - Comment out the first line of JavaScript - click on the kitten and note the error
 
-### Box Sizing
+<!-- ### Box Sizing
 
 Examine the paragraphs in the inspector. Box dimensions are additive by default - the amount of space they take up in the browser will be a combination of the amount of content, width, padding and border properties (margins are outside the box model).
 
@@ -262,7 +310,7 @@ Try:
 - Setting the width of the paragraphs to 400px
 - Then comment out the box sizing property and examine the width and height using the inspector
 
-See this [sample](https://codepen.io/DannyBoyNYC/pen/gqeKqd) on Codepen.
+See this [sample](https://codepen.io/DannyBoyNYC/pen/gqeKqd) on Codepen. -->
 
 ### Media Queries Demo
 
@@ -300,6 +348,8 @@ In the first case (`min-width`) the styles are added when the screen is small. I
 
 ## Data Visualization
 
+If our needs are simple we can use HTML and CSS to display data visualizations.
+
 ```html
 <div style="font: 10px sans-serif; text-align: right; color: white;">
   <div style="background: steelblue; padding: 3px; margin: 1px; width: 40px;">
@@ -323,17 +373,23 @@ In the first case (`min-width`) the styles are added when the screen is small. I
 </div>
 ```
 
+It is rare to create a data visualization using only HTML and CSS. To create reusable logic we can use JavaScript.
+
+Add this to `scripts.js`:
+
 ```js
-// ============================================================
 var firstParagraph = document.querySelector("p");
 
-function makeDiv() {
-  const p = document.createElement("p");
-  p.innerHTML = "Hello, world!";
-  firstParagraph.append(p);
+function makePara() {
+  const para = document.createElement("p");
+  para.innerText = "I'm a new paragraph!";
+  firstParagraph.after(para);
 }
-makeDiv();
 
+makePara();
+```
+
+```js
 // ============================================================
 
 var data = [40, 80, 150, 160, 230, 420];
@@ -348,23 +404,23 @@ var chart = `
 `;
 
 firstParagraph.innerHTML = chart;
+```
 
-// ============================================================
-
-var data = [40, 80, 150, 160, 230, 420];
+```js
 var chart = "";
+
 for (var dataPoint = 0; dataPoint < data.length; dataPoint++) {
-  chart += `<div class="dv-bar" width: ${data[dataPoint]}px;">
+  chart += `<div class="dv-bar" style="width: ${data[dataPoint]}px;">
       ${data[dataPoint]}
     </div>`;
 }
 
 firstParagraph.innerHTML = chart;
+```
 
-// ============================================================
+Add CSS to style `dv-bar`.
 
-var data = [40, 80, 150, 160, 230, 420];
-
+```js
 var chart = document.createElement("div");
 chart.className = "dv-container";
 
@@ -374,41 +430,50 @@ for (var dataPoint = 0; dataPoint < data.length; dataPoint++) {
     </div>`;
 }
 
-firstParagraph.append(chart);
+firstParagraph.after(chart);
+```
 
-// ============================================================
+Add CSS to style `dv-container`.
 
-var data = [40, 80, 150, 160, 230, 420];
+An alternate form of looping:
 
-var chart = "";
+```js
+var chart = document.createElement("div");
+chart.className = "dv-container";
 
-for (dataPoint in data) {
-  chart += `<div class="dv-bar foo" style="width: ${data[dataPoint]}px;">
+for (var dataPoint in data) {
+  chart.innerHTML += `<div class="dv-bar" style="width: ${data[dataPoint]}px;">
       ${data[dataPoint]}
     </div>`;
 }
 
-firstParagraph.innerHTML = chart;
+firstParagraph.after(chart);
+```
 
-// ============================================================
+Example using Array methods:
 
+```js
 var data = [40, 80, 150, 160, 230, 420];
-
-var dataPlusHundered = data.map((num) => num + 100);
+var dataPlusHundered = data.map(function (d) {
+  return d + 100;
+});
 
 console.log(dataPlusHundered);
 
-const sortable = [3, 6, 5, 1, 9, 6, 5, 8, 2, 7];
-
 console.log([3, 6, 5, 1, 9, 6, 5, 8, 2, 7].sort());
+const valuesList = [3, 6, 5, 1, 9, 6, 5, 8, 2, 7];
+console.log(valuesList.sort());
+console.log(
+  valuesList.filter(function (d) {
+    return d > 5;
+  })
+);
+```
 
-// ============================================================
-
-var data = [40, 80, 150, 160, 230, 420];
-
+```js
 var chart = `<div class="dv-container">
   ${data.map(
-    (bar) =>
+    function(bar) =>
       `<div class="dv-bar" style="width: ${bar}px;">
       ${bar}
     </div>`
@@ -416,4 +481,71 @@ var chart = `<div class="dv-container">
 </div>`;
 
 firstParagraph.innerHTML = chart;
+```
+
+Use `.join("")` to join the array of strings into a single string.
+
+```js
+var chart = `<div class="dv-container">
+  ${data
+    .map(
+      (bar) =>
+        `<div class="dv-bar" style="width: ${bar}px;">
+      ${bar}
+    </div>`
+    )
+    .join("")}
+</div>`;
+
+firstParagraph.innerHTML = chart;
+```
+
+## Homework
+
+```html
+<div
+  class="circle-container"
+  style="
+    display: flex;
+    align-items: center;
+    text-align: center;
+    line-height: 180px;
+    font-size: 36px;
+  "
+>
+  <div class="circle" style="width: 200px; height: 200px">200</div>
+  <div class="circle" style="width: 180px; height: 180px">180</div>
+  <div class="circle" style="width: 220px; height: 220px">220</div>
+</div>
+```
+
+```css
+.circle {
+  border-radius: 50%;
+  background-color: green;
+  margin: 12px;
+}
+```
+
+```js
+var chartData = [200, 180, 220];
+```
+
+Answer:
+
+```js
+let header = document.querySelector("h1");
+
+var chartData = [23, 42, 16];
+
+var circleChart = document.createElement("div");
+circleChart.className = "circle-container";
+
+for (let dataPoint in chartData) {
+  circleChart.innerHTML += `<div class="circle" style="width: ${data[dataPoint]}px; height: ${data[dataPoint]}px">
+      ${data[dataPoint]}
+    </div>`;
+}
+
+header.after(circleChart);
 ```
