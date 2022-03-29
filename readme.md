@@ -11,6 +11,7 @@
     - [User Agent Styles](#user-agent-styles)
   - [CSS Syntax](#css-syntax)
     - [Three Pillars of the Web](#three-pillars-of-the-web)
+    - [Streamline/Modernize the JS](#streamlinemodernize-the-js)
       - [The Fourth Pillar](#the-fourth-pillar)
     - [HTML, CSS and JavaScript Comments](#html-css-and-javascript-comments)
     - [Media Queries Demo](#media-queries-demo)
@@ -41,6 +42,7 @@ At the end of class I typically upload or "push" my files back up to Github for 
 
 ## Zoom Tips
 
+- Do not run Zoom in full screen mode. It will hinder your ability to switch apps
 - Press the spacebar if muted to temporarily enable the microphone
 - If possible, leave your camera on
 - Use a second screen by dialing into Zoom on another device or use a larger monitor
@@ -65,7 +67,7 @@ This exercise introduces some web development basics but is also intended to get
 2. Download the zip file from this page using the green "Code" download button on Github
 3. Unarchive the zip file into your new directory
 4. Open the folder `introduction-main` in VS Code
-5. Create a new `index.html` in the `app` directory
+5. Create a new file `index.html` in the `app` directory
 6. In your .html file - type in ! and press tab and this should appear:
 
 ```html
@@ -94,8 +96,9 @@ This exercise introduces some web development basics but is also intended to get
 </div>
 ```
 
-1. Install the Live Server extension in VSCode and use it to open `app/index.html` in Google Chrome
-2. Right click on any text and choose `Inspect`.
+1. Install the Prettier extension in VS Code
+1. Install the Live Server extension in VS Code and use it to open `app/index.html` in Google Chrome
+1. Right click on any text and choose `Inspect`.
 
 ### Dev Tools
 
@@ -121,7 +124,7 @@ A `<div>` tag is a block tag which is used to create a logical division in your 
 
 Try:
 
-1. Use the inspector to add `margin`, `padding`, `border` and `height` to the `em` tag with and without `display: block` and `display: inline-block` noting the box model graphic in the inspector
+- Use the inspector to add `margin`, `padding`, `border` and `height` to the `em` tag with and without `display: block` and `display: inline-block` noting the box model graphic in the inspector
 
 ### HTML and Semantics
 
@@ -222,7 +225,15 @@ Try:
 
 Examine the applicable JS and CSS.
 
-Streamline / modernize the JS:
+### Three Pillars of the Web
+
+This simple document illustrates the three pillars of the web - content, appearance and behavior - working together. It is an example of the [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) - an important principle in programming.
+
+1. Content (HTML) - uses HTML to _semantically_ markup the content
+1. Appearance (CSS) - uses CSS to determine how the content will appear to the user
+1. Behavior (JavaScript) - uses JavaScript to control how the pages works and allow the user to interact with the content
+
+### Streamline/Modernize the JS
 
 ```js
 // select document elements & store them in variables
@@ -232,6 +243,17 @@ const kittenPic = document.querySelector(".kitten-pic");
 // create a new variable and initialize it to zero (to store kitten clicks)
 let kittenClicks = 0;
 
+kittenPic.addEventListener("click", () => {
+  // commands to run when the kitten is clicked
+  kittenClicks++;
+  console.log("You kitten clicked " + kittenClicks + " times.");
+  textSpan.innerText = kittenClicks;
+});
+```
+
+Use a named function:
+
+```js
 // add a click event listener to kittenPic
 kittenPic.addEventListener("click", registerClick);
 
@@ -243,17 +265,20 @@ function registerClick() {
 }
 ```
 
-### Three Pillars of the Web
+Explore the `registerClick` function:
 
-This simple document illustrates the three pillars of the web - content, appearance and behavior - working together. It is an example of the [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) - an important principle in programming.
-
-1. Content (HTML) - uses HTML to _semantically_ markup the content
-1. Appearance (CSS) - uses CSS to determine how the content will appear to the user
-1. Behavior (JavaScript) - uses JavaScript to control how the pages works and allow the user to interact with the content
+```js
+function registerClick(event) {
+  kittenClicks++;
+  console.log(event.target.width);
+  console.log(`You kitten clicked ${kittenClicks} times.`);
+  textSpan.innerText = kittenClicks;
+}
+```
 
 #### The Fourth Pillar
 
-In this class we will be using and addition web technology - scalable vector graphics (SVG). SVG is to graphics what HTML is to text.
+In this class we will be using an additional web technology - Scalable Vector Graphics (SVG). SVG is to web graphics what HTML is to text.
 
 ```svg
 <svg width="300" height="200">
@@ -270,7 +295,7 @@ svg {
 }
 
 svg circle {
-  fill: green;
+  fill: blue;
 }
 ```
 
@@ -350,30 +375,21 @@ In the first case (`min-width`) the styles are added when the screen is small. I
 
 If our needs are simple we can use HTML and CSS to display data visualizations.
 
+Add the following to `index.html` after the first paragraph:
+
+<!-- prettier-ignore -->
 ```html
 <div style="font: 10px sans-serif; text-align: right; color: white;">
-  <div style="background: steelblue; padding: 3px; margin: 1px; width: 40px;">
-    4
-  </div>
-  <div style="background: steelblue; padding: 3px; margin: 1px; width: 80px;">
-    8
-  </div>
-  <div style="background: steelblue; padding: 3px; margin: 1px; width: 150px;">
-    15
-  </div>
-  <div style="background: steelblue; padding: 3px; margin: 1px; width: 160px;">
-    16
-  </div>
-  <div style="background: steelblue; padding: 3px; margin: 1px; width: 230px;">
-    23
-  </div>
-  <div style="background: steelblue; padding: 3px; margin: 1px; width: 420px;">
-    42
-  </div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 40px;">4</div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 80px;">8</div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 150px;">15</div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 160px;">16</div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 230px;">23</div>
+  <div style="background: steelblue; padding: 3px; margin: 1px; width: 420px;">42</div>
 </div>
 ```
 
-It is rare to create a data visualization using only HTML and CSS. To create reusable logic we can use JavaScript.
+It is rare to create a data visualization using only HTML and CSS. To create reusable logic we use JavaScript.
 
 Add this to `scripts.js`:
 
@@ -389,10 +405,29 @@ function makePara() {
 makePara();
 ```
 
-```js
-// ============================================================
+Demo: What's with all these dots?
 
+```js
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  id: 5566,
+  fullName: function () {
+    return `${this.firstName} ${this.lastName}`;
+  },
+};
+
+console.log(person.id);
+console.log(person.fullName());
+```
+
+```js
 var data = [40, 80, 150, 160, 230, 420];
+
+// console.log(data[4])
+// var len = data.length;
+// var idx = data.indexOf(160);
+// console.log("length:", len, "index of 160:", idx);
 
 var chart = `
   <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[0]}px;">${data[0]}</div>
@@ -406,6 +441,29 @@ var chart = `
 firstParagraph.innerHTML = chart;
 ```
 
+Use CSS.
+
+```html
+var chart = `
+<div class="dv-bar" style="width: ${data[0]}px;">${data[0]}</div>
+<div class="dv-bar" style="width: ${data[1]}px;">${data[1]}</div>
+<div class="dv-bar" style="width: ${data[2]}px;">${data[2]}</div>
+<div class="dv-bar" style="width: ${data[3]}px;">${data[3]}</div>
+<div class="dv-bar" style="width: ${data[4]}px;">${data[4]}</div>
+<div class="dv-bar" style="width: ${data[5]}px;">${data[5]}</div>
+`;
+```
+
+```css
+.dv-bar {
+  background: steelblue;
+  padding: 3px;
+  margin: 1px;
+}
+```
+
+Use a for loop to generate the bar chart:
+
 ```js
 var chart = "";
 
@@ -418,7 +476,7 @@ for (var dataPoint = 0; dataPoint < data.length; dataPoint++) {
 firstParagraph.innerHTML = chart;
 ```
 
-Add CSS to style `dv-bar`.
+Please the bars inside a `div` with a class name of `dv-container`:
 
 ```js
 var chart = document.createElement("div");
@@ -435,6 +493,14 @@ firstParagraph.after(chart);
 
 Add CSS to style `dv-container`.
 
+```css
+.dv-container {
+  font: 10px sans-serif;
+  text-align: right;
+  color: white;
+}
+```
+
 An alternate form of looping:
 
 ```js
@@ -450,10 +516,9 @@ for (var dataPoint in data) {
 firstParagraph.after(chart);
 ```
 
-Example using Array methods:
+Examples using Array methods:
 
 ```js
-var data = [40, 80, 150, 160, 230, 420];
 var dataPlusHundered = data.map(function (d) {
   return d + 100;
 });
@@ -470,10 +535,10 @@ console.log(
 );
 ```
 
+<!-- prettier-ignore -->
 ```js
 var chart = `<div class="dv-container">
-  ${data.map(
-    function(bar) =>
+  ${data.map( bar =>
       `<div class="dv-bar" style="width: ${bar}px;">
       ${bar}
     </div>`
@@ -485,16 +550,14 @@ firstParagraph.innerHTML = chart;
 
 Use `.join("")` to join the array of strings into a single string.
 
+<!-- prettier-ignore -->
 ```js
 var chart = `<div class="dv-container">
-  ${data
-    .map(
-      (bar) =>
-        `<div class="dv-bar" style="width: ${bar}px;">
+  ${data.map( bar =>
+      `<div class="dv-bar" style="width: ${bar}px;">
       ${bar}
     </div>`
-    )
-    .join("")}
+  ).join("")}
 </div>`;
 
 firstParagraph.innerHTML = chart;
@@ -531,7 +594,7 @@ firstParagraph.innerHTML = chart;
 var chartData = [200, 180, 220];
 ```
 
-Answer:
+Possible solution:
 
 ```js
 let header = document.querySelector("h1");
