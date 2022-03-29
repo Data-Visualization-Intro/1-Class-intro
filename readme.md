@@ -13,8 +13,6 @@
     - [Three Pillars of the Web](#three-pillars-of-the-web)
     - [Streamline/Modernize the JS](#streamlinemodernize-the-js)
       - [The Fourth Pillar](#the-fourth-pillar)
-    - [HTML, CSS and JavaScript Comments](#html-css-and-javascript-comments)
-    - [Media Queries Demo](#media-queries-demo)
   - [Data Visualization](#data-visualization)
   - [Homework](#homework)
 
@@ -269,8 +267,8 @@ Explore the `registerClick` function:
 
 ```js
 function registerClick(event) {
-  kittenClicks++;
   console.log(event.target.width);
+  kittenClicks++;
   console.log(`You kitten clicked ${kittenClicks} times.`);
   textSpan.innerText = kittenClicks;
 }
@@ -279,6 +277,8 @@ function registerClick(event) {
 #### The Fourth Pillar
 
 In this class we will be using an additional web technology - Scalable Vector Graphics (SVG). SVG is to web graphics what HTML is to text.
+
+Copy and paste this beneath the first `<p>` in `index.html`:
 
 ```svg
 <svg width="300" height="200">
@@ -299,78 +299,6 @@ svg circle {
 }
 ```
 
-### HTML, CSS and JavaScript Comments
-
-In most editors the keyboard shortcut `cmd-/` will comment out a line or lines with the appropriate code:
-
-- HTML: `<!-- -->`
-- CSS: `/* */`
-- JavaScript: `/* */` for multiline comments and `//` for single line comments
-
-Try:
-
-- Comment on and off the meta tag in the HTML file while viewing the result in the browser with the Toggle device button on and off
-- Comment out the body CSS rule
-- Comment out the first line of JavaScript - click on the kitten and note the error
-
-<!-- ### Box Sizing
-
-Examine the paragraphs in the inspector. Box dimensions are additive by default - the amount of space they take up in the browser will be a combination of the amount of content, width, padding and border properties (margins are outside the box model).
-
-There is another sizing method called `border-box`. This method calculates the border and padding within the width and is simpler to work with.
-
-Add `box-sizing: border-box/content-box` to review box model options.
-
-```css
-p {
-  box-sizing: border-box;
-  ...;
-}
-```
-
-Note the the height is now exactly 100px.
-
-Try:
-
-- Setting the width of the paragraphs to 400px
-- Then comment out the box sizing property and examine the width and height using the inspector
-
-See this [sample](https://codepen.io/DannyBoyNYC/pen/gqeKqd) on Codepen. -->
-
-### Media Queries Demo
-
-Add a media query to `styles.css`:
-
-```css
-@media (min-width: 700px) {
-  p {
-    border: 3px solid red;
-    width: 600px;
-  }
-}
-```
-
-Resize the browser and note:
-
-- overrides in the inspector
-- `min-width` means "greater than"
-- the css for `>` (greater than) 700px is _added_ to the styles when the condition is true.
-
-Change it to use `max-width`:
-
-```css
-@media (max-width: 700px) {
-  p {
-    border: 3px solid red;
-    width: 80%;
-  }
-}
-```
-
-Note: `max-width` means "less than".
-
-In the first case (`min-width`) the styles are added when the screen is small. In the second the styles are added when the screen is wide. This will be important when we start optimizing our CSS for devices with different screen sizes.
-
 ## Data Visualization
 
 If our needs are simple we can use HTML and CSS to display data visualizations.
@@ -379,6 +307,7 @@ Add the following to `index.html` after the first paragraph:
 
 <!-- prettier-ignore -->
 ```html
+<!-- prettier-ignore -->
 <div style="font: 10px sans-serif; text-align: right; color: white;">
   <div style="background: steelblue; padding: 3px; margin: 1px; width: 40px;">4</div>
   <div style="background: steelblue; padding: 3px; margin: 1px; width: 80px;">8</div>
@@ -389,9 +318,19 @@ Add the following to `index.html` after the first paragraph:
 </div>
 ```
 
-It is rare to create a data visualization using only HTML and CSS. To create reusable logic we use JavaScript.
+Hard-coding is impractical for most datasets. To create reusable logic we'll use JavaScript.
 
 Add this to `scripts.js`:
+
+```js
+var firstParagraph = document.querySelector("p");
+
+const para = document.createElement("p");
+para.innerText = "I'm a new paragraph!";
+firstParagraph.after(para);
+```
+
+Same as above but using a function:
 
 ```js
 var firstParagraph = document.querySelector("p");
@@ -404,6 +343,8 @@ function makePara() {
 
 makePara();
 ```
+
+---
 
 Demo: What's with all these dots?
 
@@ -421,8 +362,12 @@ console.log(person.id);
 console.log(person.fullName());
 ```
 
+---
+
+Create the bars based on data:
+
 ```js
-var data = [40, 80, 150, 160, 230, 420];
+let data = [40, 80, 150, 160, 230, 420];
 
 // console.log(data[4])
 // var len = data.length;
@@ -441,7 +386,7 @@ var chart = `
 firstParagraph.innerHTML = chart;
 ```
 
-Use CSS.
+Use CSS to format the bars:
 
 ```html
 var chart = `
@@ -467,7 +412,7 @@ Use a for loop to generate the bar chart:
 ```js
 var chart = "";
 
-for (var dataPoint = 0; dataPoint < data.length; dataPoint++) {
+for (let dataPoint = 0; dataPoint < data.length; dataPoint++) {
   chart += `<div class="dv-bar" style="width: ${data[dataPoint]}px;">
       ${data[dataPoint]}
     </div>`;
@@ -504,9 +449,6 @@ Add CSS to style `dv-container`.
 An alternate form of looping:
 
 ```js
-var chart = document.createElement("div");
-chart.className = "dv-container";
-
 for (var dataPoint in data) {
   chart.innerHTML += `<div class="dv-bar" style="width: ${data[dataPoint]}px;">
       ${data[dataPoint]}
@@ -516,14 +458,14 @@ for (var dataPoint in data) {
 firstParagraph.after(chart);
 ```
 
-Examples using Array methods:
+Examples of using Array methods:
 
 ```js
 var dataPlusHundered = data.map(function (d) {
   return d + 100;
 });
 
-console.log(dataPlusHundered);
+console.log(dataPlusHundred);
 
 console.log([3, 6, 5, 1, 9, 6, 5, 8, 2, 7].sort());
 const valuesList = [3, 6, 5, 1, 9, 6, 5, 8, 2, 7];
@@ -565,50 +507,145 @@ firstParagraph.innerHTML = chart;
 
 ## Homework
 
+Convert the hard-coded circle chart below to JavaScript using the methods discussed above. (You do not need to format the numbers.)
+
+A starting point:
+
 ```html
-<div
-  class="circle-container"
-  style="
-    display: flex;
-    align-items: center;
-    text-align: center;
-    line-height: 180px;
-    font-size: 36px;
-  "
->
-  <div class="circle" style="width: 200px; height: 200px">200</div>
-  <div class="circle" style="width: 180px; height: 180px">180</div>
-  <div class="circle" style="width: 220px; height: 220px">220</div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework</title>
+    <style>
+      .circle {
+        border-radius: 50%;
+        background-color: green;
+        margin: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="circle-container"
+      style="
+        display: flex;
+        align-items: center;
+        text-align: center;
+        line-height: 180px;
+        font-size: 36px;
+      "
+    >
+      <div class="circle" style="width: 200px; height: 200px">200</div>
+      <div class="circle" style="width: 180px; height: 180px">180</div>
+      <div class="circle" style="width: 220px; height: 220px">220</div>
+    </div>
+    <script></script>
+  </body>
+</html>
 ```
 
-```css
-.circle {
-  border-radius: 50%;
-  background-color: green;
-  margin: 12px;
-}
-```
+Add the data:
 
 ```js
 var chartData = [200, 180, 220];
 ```
 
-Possible solution:
+Create the circles in JavaScript using the data:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .circle {
+        border-radius: 50%;
+        background-color: green;
+        margin: 12px;
+      }
+      .circle-container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        line-height: 180px;
+        font-size: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="circle-container"></div>
+
+    <script>
+      var chartData = [200, 180, 220];
+
+      var container = document.querySelector(".circle-container");
+
+      var chart = `
+      <div class="circle" style="width: ${chartData[0]}px; height: ${chartData[0]}px">${chartData[0]}</div>
+      <div class="circle" style="width: ${chartData[1]}px; height: ${chartData[1]}px">${chartData[1]}</div>
+      <div class="circle" style="width: ${chartData[2]}px; height: ${chartData[2]}px">${chartData[2]}</div>
+      `;
+
+      container.innerHTML = chart;
+    </script>
+  </body>
+</html>
+```
+
+Possible end solution:
 
 ```js
-let header = document.querySelector("h1");
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      .circle {
+        border-radius: 50%;
+        background-color: green;
+        margin: 12px;
+      }
+      .circle-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        line-height: 4;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <script>
+      let header = document.querySelector("h1");
 
-var chartData = [23, 42, 16];
+      var chartData = [200, 120, 160];
 
-var circleChart = document.createElement("div");
-circleChart.className = "circle-container";
+      var circleChart = document.createElement("div");
+      circleChart.className = "circle-container";
 
-for (let dataPoint in chartData) {
-  circleChart.innerHTML += `<div class="circle" style="width: ${data[dataPoint]}px; height: ${data[dataPoint]}px">
-      ${data[dataPoint]}
+      for (let dataPoint in chartData) {
+        circleChart.innerHTML += `<div class="circle" style="width: ${chartData[dataPoint]}px; height: ${chartData[dataPoint]}px">
+      ${chartData[dataPoint]}
     </div>`;
-}
+      }
 
-header.after(circleChart);
+      header.after(circleChart);
+    </script>
+  </body>
+</html>
+
 ```
