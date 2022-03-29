@@ -2,7 +2,7 @@
 var textSpan = document.querySelector("p span");
 var kittenPic = document.querySelector("img");
 
-// create a new variable and initialize it to zero (to store kitten clicks)
+// create a new variable and initialize it to zero (stores kitten clicks)
 var kittenClicks = 0;
 
 // add a click event listener to kittenPic
