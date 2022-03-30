@@ -15,3 +15,29 @@ function registerClick(event) {
   console.log(`You kitten clicked ${kittenClicks} times!`);
   textSpan.innerText = kittenClicks;
 }
+
+// ===
+
+var firstParagraph = document.querySelector("p");
+
+const para = document.createElement("p");
+para.innerText = "I'm a new paragraph!";
+firstParagraph.after(para);
+
+let data = [40, 80, 150, 160, 230, 420, 600];
+
+var chart = `
+<h3>Chart Title</h3>
+<div class="dv-container">
+${data
+  .map(
+    (bar) => `<div class="dv-bar" style="width: ${bar}px;">
+      ${bar}
+    </div>`
+  )
+  .join("")}
+</div>`;
+
+firstParagraph.innerHTML = chart;
+
+var dataPlusHundered = data.map((d) => d + 100).filter((d) => d > 250);

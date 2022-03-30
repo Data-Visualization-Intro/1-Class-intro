@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework</title>
+    <style>
+      .circle {
+        border-radius: 50%;
+        background-color: green;
+        margin: 12px;
+      }
+      .circle-container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        line-height: 180px;
+        font-size: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="circle-container"></div>
+
+    <script>
+      var chartData = [200, 180, 220];
+
+      const container = document.querySelector(".circle-container");
+
+      const chart = `
+      
+      <div class="circle" style="width: ${chartData[0]}px; height: ${chartData[0]}px">${chartData[0]}</div>
+      <div class="circle" style="width: ${chartData[1]}px; height: ${chartData[1]}px">${chartData[1]}</div>
+      <div class="circle" style="width: ${chartData[2]}px; height: ${chartData[2]}px">${chartData[2]}</div>
+      
+      `;
+
+      container.innerHTML = chart;
+    </script>
+  </body>
+</html>

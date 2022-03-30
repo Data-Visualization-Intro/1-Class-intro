@@ -44,3 +44,23 @@ p {
     width: 600px;
   }
 } */
+
+svg {
+  width: 300px;
+  height: 200px;
+}
+
+svg circle {
+  fill: blue;
+}
+
+.dv-bar {
+  background: steelblue;
+  padding: 3px;
+  margin: 1px;
+}
+.dv-container {
+  font: 10px sans-serif;
+  text-align: right;
+  color: white;
+}
