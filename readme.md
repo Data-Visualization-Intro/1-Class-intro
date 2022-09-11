@@ -81,22 +81,31 @@ This exercise introduces some web development basics but is also intended to get
 </html>
 ```
 
-1. Add the code below to `index.html`
+1. Add the following code to `index.html`
 
 ```html
-<h1>Hello world!</h1>
-<div>
-  <p>Paragraph's and divs are block elements. They're rendered inside a box.</p>
-  <p>
-    This <em>italic text</em> is an inline element. Here is a
-    <a href="#test">link</a> - also an inline element.
-  </p>
-</div>
+<body id="top">
+  <h1>Hello world!</h1>
+  <main>
+    <p>Paragraph's and divs are block elements. They rendered inside a box.</p>
+
+    <p>
+      This <em>italic text</em> is an inline element. Here is a
+      <a href="#test">link</a> - also an inline element.
+    </p>
+
+    <img src="http://placekitten.com/320/240" alt="click the kitten" />
+
+    <p>You clicked on the kitten <span aria-live="polite">0</span> times</p>
+  </main>
+
+  <p id="test"><a href="#top">Down here!</a></p>
+
+  <script src="scripts.js"></script>
+</body>
 ```
 
-1. Install the Prettier extension in VS Code
-1. Install the Live Server extension in VS Code and use it to open `app/index.html` in Google Chrome
-1. Right click on any text and choose `Inspect`.
+Right click on any text and choose `Inspect`. This will open the developer tools. You can also use the keyboard shortcut `cmd + option + i` on a Mac or `ctrl + shift + i` on a PC.
 
 ### Dev Tools
 
@@ -128,11 +137,11 @@ Try:
 
 HTML tags convey _meaning_ to the content that makes up the document to help make it understandable. Since HTML tags can be made to look anyway you want via CSS they are [semantically](https://en.wikipedia.org/wiki/Semantic_HTML) - not stylistically - important. The proper use of HTML tags is important for accessibility.
 
-HTML tags have _attributes_ that provide additional information about HTML elements such as the `href` in the anchor (`<a href >`) tag.
+HTML tags have _attributes_ that provide additional information about HTML elements such as the `href` in the anchor (`<a href="" >`) tag or the `src` in the image (`<img src="" >`) tag.
 
 Try:
 
-- Use the inspector to change the `div` tag to an `article` tag
+- Use the inspector to change the `div` tag to an `aside` tag. Note that there is no display difference but the semantics of the tag have changed.
 
 There are quite a [few html tags](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) - each has a meaning and appropriate use.
 
@@ -140,9 +149,17 @@ There are quite a [few html tags](https://developer.mozilla.org/en-US/docs/Web/H
 
 `User agent styles` are the default styles for HTML elements. By default the browser places margins above and below the header, paragraph and on all four sides of the body. These default styles make sure that the document can be displayed even in the absence of a style sheet. You will typically build on top of these.
 
-1. Add `<link rel="stylesheet" href="styles.css" />` to the head of the html document
+1. Add a link to a CSS file in the head of your HTML file
+
+```html
+<link rel="stylesheet" href="styles.css" />
+```
+
+to the head of the html document
 
 ## CSS Syntax
+
+The visual portion of a data visualization is typically a mix of CSS and SVG. CSS is used to style the page and SVG is used to create the visual elements. Thus, CSS is a bit less important but still important to understand.
 
 CSS rules consist of a [selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors), a set of curly braces, and a series of properties and values separated by a full colon and terminated by a semi colon.
 
@@ -171,10 +188,6 @@ p {
 
 Inspect the paragraph again. Note the changes in the inspector.
 
-<!-- Try:
-
-- Setting the height to 4px with `overflow: hidden;` and `overflow: auto;` -->
-
 Note the drop down (triangle) next to padding, margin and border properties in the inspector. This indicates a CSS shortcut. Click on it. Our border property could also be written in long form.
 
 ```css
@@ -186,32 +199,6 @@ border-width: 3px;
 Try:
 
 - `border-top-style: dotted;`
-
-Delete the body tag and its contents. Paste the following in in its place.
-
-```html
-<body id="top">
-  <h1>Hello world!</h1>
-  <main>
-    <p>Paragraph's and divs are block elements. They rendered inside a box.</p>
-
-    <p>
-      This <em>italic text</em> is an inline element. Here is a
-      <a href="#test">link</a> - also an inline element.
-    </p>
-
-    <img src="http://placekitten.com/320/240" alt="click the kitten" />
-
-    <p>You clicked on the kitten <span aria-live="polite">0</span> times</p>
-  </main>
-
-  <p id="test"><a href="#top">Down here!</a></p>
-
-  <script src="scripts.js"></script>
-</body>
-```
-
-Note that the CSS is linked in the head of the document and the JavaScript is the last item in the HTML just above the closing body tag.
 
 Click on the kitten and on the links to test.
 
