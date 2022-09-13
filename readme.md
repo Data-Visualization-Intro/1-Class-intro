@@ -14,7 +14,10 @@
     - [Streamline/Modernize the JS](#streamlinemodernize-the-js)
       - [The Fourth Pillar](#the-fourth-pillar)
   - [Data Visualization](#data-visualization)
-  - [Homework](#homework)
+  - [Notes](#notes)
+  - [A Simple Bar Chart](#a-simple-bar-chart)
+  - [A Simple Map](#a-simple-map)
+  - [Homework Convert the hard-coded circle chart below to JavaScript using](#homework-convert-the-hard-coded-circle-chart-below-to-javascript-using)
 
 # Introduction
 
@@ -492,11 +495,121 @@ var chart = `<div class="dv-container">
 firstParagraph.innerHTML = chart;
 ```
 
-## Homework
+## Notes
 
-Convert the hard-coded circle chart below to JavaScript using the methods discussed above. (You do not need to format the numbers.)
+## A Simple Bar Chart
 
-A starting point:
+`https://www.highcharts.com/docs/getting-started/your-first-chart`
+
+`<script src="https://code.highcharts.com/highcharts.js"></script>`
+
+Add data points, add a new person.
+
+The scales are automatically adjusted according to the data extents.
+
+Note the way the chart is built and styled by inspecting the HTML and CSS.
+
+The styling is done in the attrributes of the SVG. Why?
+
+## A Simple Map
+
+`https://www.highcharts.com/docs/maps/getting-started`
+`https://www.highcharts.com/demo/maps/color-axis`
+
+```html
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/data.js"></script>
+```
+
+```js
+(async () => {
+  const topology = await fetch(
+    "https://code.highcharts.com/mapdata/countries/us/us-all.topo.json"
+  ).then((response) => response.json());
+
+  Highcharts.getJSON(
+    "https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/us-population-density.json",
+    function (data) {
+      // Make codes uppercase to match the map data
+      data.forEach(function (p) {
+        p.code = p.code.toUpperCase();
+      });
+
+      // Instantiate the map
+      Highcharts.mapChart("map-container", {
+        chart: {
+          map: topology,
+          borderWidth: 1,
+        },
+
+        title: {
+          text: "US population density (/km²)",
+        },
+
+        exporting: {
+          sourceWidth: 600,
+          sourceHeight: 500,
+        },
+
+        legend: {
+          layout: "horizontal",
+          borderWidth: 0,
+          backgroundColor: "rgba(255,255,255,0.85)",
+          floating: true,
+          verticalAlign: "top",
+          y: 25,
+        },
+
+        mapNavigation: {
+          enabled: true,
+        },
+
+        colorAxis: {
+          min: 1,
+          type: "logarithmic",
+          minColor: "#EEEEFF",
+          maxColor: "#000022",
+          stops: [
+            [0, "#EFEFFF"],
+            [0.67, "#4444FF"],
+            [1, "#000022"],
+          ],
+        },
+
+        series: [
+          {
+            accessibility: {
+              point: {
+                valueDescriptionFormat:
+                  "{xDescription}, {point.value} people per square kilometer.",
+              },
+            },
+            animation: {
+              duration: 1000,
+            },
+            data: data,
+            joinBy: ["postal-code", "code"],
+            dataLabels: {
+              enabled: true,
+              color: "#FFFFFF",
+              format: "{point.code}",
+            },
+            name: "Population density",
+            tooltip: {
+              pointFormat: "{point.code}: {point.value}/km²",
+            },
+          },
+        ],
+      });
+    }
+  );
+})();
+```
+
+## Homework Convert the hard-coded circle chart below to JavaScript using
+
+the methods discussed above. (You do not need to format the numbers.) A starting
+point:
 
 ```html
 <!DOCTYPE html>
@@ -634,5 +747,4 @@ Possible end solution:
     </script>
   </body>
 </html>
-
 ```
