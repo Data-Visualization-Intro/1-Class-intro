@@ -11,13 +11,17 @@
     - [User Agent Styles](#user-agent-styles)
   - [CSS Syntax](#css-syntax)
     - [Three Pillars of the Web](#three-pillars-of-the-web)
-    - [Streamline/Modernize the JS](#streamlinemodernize-the-js)
+    - [Update and Modernize the JS](#update-and-modernize-the-js)
       - [The Fourth Pillar](#the-fourth-pillar)
   - [Data Visualization](#data-visualization)
+    - [Hardcoded Data](#hardcoded-data)
+    - [Dynamic Data](#dynamic-data)
   - [Notes](#notes)
   - [A Simple Bar Chart](#a-simple-bar-chart)
   - [A Simple Map](#a-simple-map)
   - [Homework Convert the hard-coded circle chart below to JavaScript using](#homework-convert-the-hard-coded-circle-chart-below-to-javascript-using)
+  - [Homework Part 2](#homework-part-2)
+  - [Extra Credit](#extra-credit)
 
 # Introduction
 
@@ -221,32 +225,34 @@ This simple document illustrates the three pillars of the web - content, appeara
 1. Appearance (CSS) - uses CSS to determine how the content will appear to the user
 1. Behavior (JavaScript) - uses JavaScript to control how the pages works and allow the user to interact with the content
 
-### Streamline/Modernize the JS
+### Update and Modernize the JS
+
+Note the use of `document.querySelector` to select elements.
 
 ```js
-// select document elements & store them in variables
+// select document elements by CLASS & store them in variables
 const textSpan = document.querySelector(".kitten-num");
 const kittenPic = document.querySelector(".kitten-pic");
 
-// create a new variable and initialize it to zero (to store kitten clicks)
 let kittenClicks = 0;
 
+// use an arrow callback function to handle the click event
 kittenPic.addEventListener("click", () => {
-  // commands to run when the kitten is clicked
   kittenClicks++;
   console.log("You kitten clicked " + kittenClicks + " times.");
   textSpan.innerText = kittenClicks;
 });
 ```
 
-Use a named function:
+Note the use of `element.addEventListener` to add an event listener to the element.
+
+Use a named function instead of an inline function:
 
 ```js
 // add a click event listener to kittenPic
 kittenPic.addEventListener("click", registerClick);
 
 function registerClick() {
-  // commands to run when the kitten is clicked
   kittenClicks++;
   console.log(`You kitten clicked ${kittenClicks} times!`);
   textSpan.innerText = kittenClicks;
@@ -257,7 +263,8 @@ Explore the `registerClick` function:
 
 ```js
 function registerClick(event) {
-  console.log(event.target.width);
+  console.log(event.target);
+  // console.log(event.target.width);
   kittenClicks++;
   console.log(`You kitten clicked ${kittenClicks} times.`);
   textSpan.innerText = kittenClicks;
@@ -293,6 +300,10 @@ svg circle {
 
 If our needs are simple we can use HTML and CSS to display data visualizations.
 
+Most of the JavaScript concepts below will be implemented usng the [D3.js](https://d3js.org/) library in this class. Don't worry if you don't grasp all the concepts below. We will eventually be using D3.js to implement similar functionality.
+
+### Hardcoded Data
+
 Add the following to `index.html` after the first paragraph:
 
 <!-- prettier-ignore -->
@@ -310,7 +321,9 @@ Add the following to `index.html` after the first paragraph:
 
 Hard-coding is impractical for most datasets. To create reusable logic we'll use JavaScript.
 
-Add this to `scripts.js`:
+### Dynamic Data
+
+Remove the HTML you just added and add this to `scripts.js`:
 
 ```js
 var firstParagraph = document.querySelector("p");
@@ -320,6 +333,8 @@ para.innerText = "I'm a new paragraph!";
 firstParagraph.after(para);
 ```
 
+Note the use of `document.createElement` to create a new element. Try inspecting the source HTML vs using view source.
+
 Same as above but using a function:
 
 ```js
@@ -327,7 +342,7 @@ var firstParagraph = document.querySelector("p");
 
 function makePara() {
   const para = document.createElement("p");
-  para.innerText = "I'm a new paragraph!";
+  para.innerText = "I'm a new paragraph revised!";
   firstParagraph.after(para);
 }
 
@@ -336,7 +351,7 @@ makePara();
 
 ---
 
-Demo: What's with all these dots?
+Demo: a JavaScript object:
 
 ```js
 const person = {
@@ -354,16 +369,20 @@ console.log(person.fullName());
 
 ---
 
-Create the bars based on data:
+Create the bars based on data and explore the `data` array:
 
 ```js
 let data = [40, 80, 150, 160, 230, 420];
 
-// console.log(data[4])
-// var len = data.length;
-// var idx = data.indexOf(160);
-// console.log("length:", len, "index of 160:", idx);
+console.log(data[4]);
+var len = data.length;
+var idx = data.indexOf(160);
+console.log("length:", len, "index of 160:", idx);
+```
 
+Add a chart variable to `scripts.js`:
+
+```js
 var chart = `
   <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[0]}px;">${data[0]}</div>
   <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[1]}px;">${data[1]}</div>
@@ -376,7 +395,7 @@ var chart = `
 firstParagraph.innerHTML = chart;
 ```
 
-Use CSS to format the bars:
+Use CSS to format the bars. First, add a class to the `<div>` elements:
 
 ```html
 var chart = `
@@ -397,7 +416,7 @@ var chart = `
 }
 ```
 
-Use a for loop to generate the bar chart:
+Use a `for loop` to generate the barchart:
 
 ```js
 var chart = "";
@@ -411,7 +430,7 @@ for (let dataPoint = 0; dataPoint < data.length; dataPoint++) {
 firstParagraph.innerHTML = chart;
 ```
 
-Please the bars inside a `div` with a class name of `dv-container`:
+Instead of declaring the `chart` variable as an empty string, create it as an empty `div` with a class name of `dv-container`:
 
 ```js
 var chart = document.createElement("div");
@@ -425,6 +444,8 @@ for (var dataPoint = 0; dataPoint < data.length; dataPoint++) {
 
 firstParagraph.after(chart);
 ```
+
+Note we are using `innerHTML` to add the HTML to the `chart` div.
 
 Add CSS to style `dv-container`.
 
@@ -448,7 +469,7 @@ for (var dataPoint in data) {
 firstParagraph.after(chart);
 ```
 
-Examples of using Array methods:
+Examples of using Array methods. Note the use of Array.map():
 
 ```js
 var dataPlusHundered = data.map(function (d) {
@@ -499,9 +520,9 @@ firstParagraph.innerHTML = chart;
 
 ## A Simple Bar Chart
 
-`https://www.highcharts.com/docs/getting-started/your-first-chart`
-
-`<script src="https://code.highcharts.com/highcharts.js"></script>`
+- `https://www.highcharts.com/docs/getting-started/your-first-chart`
+- `<script src="https://code.highcharts.com/highcharts.js"></script>`
+- `<div id="container" style="width: 100%; height: 400px"></div>`
 
 Add data points, add a new person.
 
@@ -513,13 +534,18 @@ The styling is done in the attrributes of the SVG. Why?
 
 ## A Simple Map
 
-`https://www.highcharts.com/docs/maps/getting-started`
-`https://www.highcharts.com/demo/maps/color-axis`
+- `https://www.highcharts.com/docs/maps/getting-started`
+- `https://www.highcharts.com/demo/maps/color-axis`
+- `<div id="map-container" style="width: 100%; height: 400px"></div>`
+
+Add the following scripts to the HTML:
 
 ```html
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/data.js"></script>
 ```
+
+Add the following to the JavaScript:
 
 ```js
 (async () => {
@@ -608,8 +634,9 @@ The styling is done in the attrributes of the SVG. Why?
 
 ## Homework Convert the hard-coded circle chart below to JavaScript using
 
-the methods discussed above. (You do not need to format the numbers.) A starting
-point:
+Explore the looping methods discussed above to create a series of circles whose size is determined by a data set. (You do not need to format the numbers.)
+
+A starting point might be to create a new `circle.html` file and copy the HTML:
 
 ```html
 <!DOCTYPE html>
@@ -625,19 +652,17 @@ point:
         background-color: green;
         margin: 12px;
       }
-    </style>
-  </head>
-  <body>
-    <div
-      class="circle-container"
-      style="
+      .circle-container {
         display: flex;
         align-items: center;
         text-align: center;
         line-height: 180px;
         font-size: 36px;
-      "
-    >
+      }
+    </style>
+  </head>
+  <body>
+    <div class="circle-container">
       <div class="circle" style="width: 200px; height: 200px">200</div>
       <div class="circle" style="width: 180px; height: 180px">180</div>
       <div class="circle" style="width: 220px; height: 220px">220</div>
@@ -647,7 +672,7 @@ point:
 </html>
 ```
 
-Add the data:
+Add the chartData variable to the script block:
 
 ```js
 var chartData = [200, 180, 220];
@@ -698,7 +723,9 @@ Create the circles in JavaScript using the data:
 </html>
 ```
 
-Possible end solution:
+Now use a looping method to iterate over the data and create the HTML.
+
+One possible solution:
 
 ```js
 <!DOCTYPE html>
@@ -728,7 +755,7 @@ Possible end solution:
     </style>
   </head>
   <body>
-    <h1>Hello World</h1>
+    <h1>Hello Chart!</h1>
     <script>
       let header = document.querySelector("h1");
 
@@ -748,3 +775,13 @@ Possible end solution:
   </body>
 </html>
 ```
+
+Try using the `Array.map()` method instead.
+
+## Homework Part 2
+
+- Create a Pie chart using Highcharts and a dataset of your choosing
+
+## Extra Credit
+
+- Create a map using Highcharts and a dataset of your choosing
