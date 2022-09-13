@@ -19,8 +19,9 @@
   - [Notes](#notes)
   - [A Simple Bar Chart](#a-simple-bar-chart)
   - [A Simple Map](#a-simple-map)
-  - [Homework Convert the hard-coded circle chart below to JavaScript using](#homework-convert-the-hard-coded-circle-chart-below-to-javascript-using)
-  - [Homework Part 2](#homework-part-2)
+  - [Homework Part One](#homework-part-one)
+  - [Homework Part Two](#homework-part-two)
+  - [Homework Part Three](#homework-part-three)
   - [Extra Credit](#extra-credit)
 
 # Introduction
@@ -632,7 +633,13 @@ Add the following to the JavaScript:
 })();
 ```
 
-## Homework Convert the hard-coded circle chart below to JavaScript using
+## Homework Part One
+
+Find a data visualization in the wild that you think is well done. Write a short paragraph describing why you think it is well done. Include a link to the visualization.
+
+## Homework Part Two
+
+Convert the hard-coded circle chart below to JavaScript.
 
 Explore the looping methods discussed above to create a series of circles whose size is determined by a data set. (You do not need to format the numbers.)
 
@@ -778,9 +785,10 @@ One possible solution:
 
 Try using the `Array.map()` method instead.
 
-## Homework Part 2
+## Homework Part Three
 
-- Create a Pie chart using Highcharts and a dataset of your choosing
+- Think of a _simple_ dataset you could use to create a chart
+- Create a chart that you feel is appropriate for your dataset set using Highcharts
 
 ## Extra Credit
 
