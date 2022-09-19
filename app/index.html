@@ -4,45 +4,51 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Creating SVG with JavaScript</title>
-    <style>
-      body {
-        font: 1rem/1.5 sans-serif;
-        background-color: black;
-        color: white;
-      }
-      svg {
-        width: 100%;
-        height: 300px;
-      }
-      .dv-bar {
-        fill: steelblue;
-      }
-    </style>
+    <title>Document</title>
+
+    <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body id="top">
-    <h1>Creating SVG with JavaScript</h1>
+    <h1>Hello world!</h1>
+    <main>
+      <p>
+        Paragraph's and divs are block elements. They rendered inside a box.
+      </p>
 
+      <svg>
+        <circle cx="150" cy="100" r="80" />
+      </svg>
+
+      <p>
+        This <em>italic text</em> is an inline element. Here is a
+        <a href="#test">link</a> - also an inline element.
+      </p>
+
+      <img src="http://placekitten.com/320/240" alt="click the kitten" />
+
+      <p>You clicked on the kitten <span aria-live="polite">0</span> times</p>
+    </main>
+
+    <p id="test"><a href="#top">Down here!</a></p>
+
+    <script src="scripts.js"></script>
     <script>
-      const body = document.querySelector("body");
+      var firstParagraph = document.querySelector("p");
+
       let data = [40, 80, 150, 160, 230, 420];
-      let spacing = 30;
 
-      // NOTE: cannot use "var chart = document.createElement("svg");"
-      const chart = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "svg"
-      );
+      var chart = document.createElement("div");
+      chart.className = "dv-container";
 
-      for (let i = 0; i < data.length; i++) {
-        //prettier-ignore
+      for (let dataPoint in data) {
         chart.innerHTML += `
-        <rect class="dv-bar" x="0" y=${spacing * i} width=${data[i]} height="20" fill="green" />`;
-        console.log(i);
+  <div class="dv-bar" style="width: ${data[dataPoint]}px;">
+    ${data[dataPoint]}
+  </div>`;
       }
 
-      body.append(chart);
+      firstParagraph.after(chart);
     </script>
   </body>
 </html>
