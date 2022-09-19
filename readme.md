@@ -320,7 +320,7 @@ Add the following to `index.html` after the first paragraph:
 </div>
 ```
 
-Hard-coding is impractical for most datasets. To create reusable logic we'll use JavaScript.
+Hard-coding is impractical for most datasets. Here, we need to make the width correspond to a variable. To create reusable logic we'll use JavaScript.
 
 ### Dynamic Data
 
@@ -384,7 +384,7 @@ console.log("length:", len, "index of 160:", idx);
 Add a chart variable to `scripts.js`:
 
 ```js
-var chart = `
+let chart = `
   <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[0]}px;">${data[0]}</div>
   <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[1]}px;">${data[1]}</div>
   <div style="background: steelblue; padding: 3px; margin: 1px; width: ${data[2]}px;">${data[2]}</div>
@@ -399,7 +399,7 @@ firstParagraph.innerHTML = chart;
 Use CSS to format the bars. First, add a class to the `<div>` elements:
 
 ```html
-var chart = `
+let chart = `
 <div class="dv-bar" style="width: ${data[0]}px;">${data[0]}</div>
 <div class="dv-bar" style="width: ${data[1]}px;">${data[1]}</div>
 <div class="dv-bar" style="width: ${data[2]}px;">${data[2]}</div>
@@ -413,19 +413,21 @@ var chart = `
 .dv-bar {
   background: steelblue;
   padding: 3px;
-  margin: 1px;
+  margin: 4px;
 }
 ```
 
 Use a `for loop` to generate the barchart:
 
 ```js
-var chart = "";
+let chart = "";
 
 for (let dataPoint = 0; dataPoint < data.length; dataPoint++) {
-  chart += `<div class="dv-bar" style="width: ${data[dataPoint]}px;">
-      ${data[dataPoint]}
-    </div>`;
+  chart += `
+  <div class="dv-bar" style="width: ${data[dataPoint]}px;">
+    ${data[dataPoint]}
+  </div>`;
+  console.log(chart);
 }
 
 firstParagraph.innerHTML = chart;
@@ -437,10 +439,11 @@ Instead of declaring the `chart` variable as an empty string, create it as an em
 var chart = document.createElement("div");
 chart.className = "dv-container";
 
-for (var dataPoint = 0; dataPoint < data.length; dataPoint++) {
-  chart.innerHTML += `<div class="dv-bar" style="width: ${data[dataPoint]}px;">
-      ${data[dataPoint]}
-    </div>`;
+for (var i = 0; i < data.length; i++) {
+  chart.innerHTML += `
+  <div class="dv-bar" style="width: ${data[i]}px;">
+   ${data[i]}
+ </div>`;
 }
 
 firstParagraph.after(chart);
@@ -458,13 +461,14 @@ Add CSS to style `dv-container`.
 }
 ```
 
-An alternate form of looping:
+An alternate form of looping, the `for loop`:
 
 ```js
-for (var dataPoint in data) {
-  chart.innerHTML += `<div class="dv-bar" style="width: ${data[dataPoint]}px;">
-      ${data[dataPoint]}
-    </div>`;
+for (let dataPoint in data) {
+  chart.innerHTML += `
+  <div class="dv-bar" style="width: ${data[dataPoint]}px;">
+    ${data[dataPoint]}
+  </div>`;
 }
 
 firstParagraph.after(chart);
@@ -494,8 +498,8 @@ console.log(
 var chart = `<div class="dv-container">
   ${data.map( bar =>
       `<div class="dv-bar" style="width: ${bar}px;">
-      ${bar}
-    </div>`
+         ${bar}
+       </div>`
   )}
 </div>`;
 
