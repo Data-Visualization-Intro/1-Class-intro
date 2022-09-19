@@ -797,9 +797,10 @@ One possible solution:
       circleChart.className = "circle-container";
 
       for (let dataPoint in chartData) {
-        circleChart.innerHTML += `<div class="circle" style="width: ${chartData[dataPoint]}px; height: ${chartData[dataPoint]}px">
-      ${chartData[dataPoint]}
-    </div>`;
+        circleChart.innerHTML += `
+        <div class="circle" style="width: ${chartData[dataPoint]}px; height: ${chartData[dataPoint]}px">
+          ${chartData[dataPoint]}
+        </div>`;
       }
 
       header.after(circleChart);
