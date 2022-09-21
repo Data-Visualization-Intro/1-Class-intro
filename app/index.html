@@ -33,5 +33,24 @@
     <p id="test"><a href="#top">Down here!</a></p>
 
     <script src="scripts.js"></script>
+
+    <script>
+      var firstParagraph = document.querySelector("p");
+
+      let data = [40, 80, 150, 160, 230, 420];
+
+      const chart = document.createElement("div");
+      chart.classList = "dv-container";
+
+      for (let i = 0; i < data.length; i++) {
+        chart.innerHTML += `
+        <div class="dv-bar" style="width: ${data[i]}px">
+          ${data[i]}
+          </div>
+        `;
+      }
+
+      firstParagraph.after(chart);
+    </script>
   </body>
 </html>

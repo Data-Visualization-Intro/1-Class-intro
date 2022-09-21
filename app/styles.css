@@ -55,3 +55,15 @@ svg circle {
   stroke-width: 6;
   fill: blue;
 }
+
+.dv-bar {
+  background: steelblue;
+  padding: 3px;
+  margin: 20px;
+}
+
+.dv-container {
+  font: 16px sans-serif;
+  text-align: right;
+  color: white;
+}
